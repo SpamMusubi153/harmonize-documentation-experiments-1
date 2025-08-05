@@ -1,8 +1,5 @@
 name: "DocChain1"
 description: "Generate modern documentation using Doxygen, Sphinx, Breathe, and Fumadocs"
-branding:
-  icon: "book-open"
-  color: "blue"
 on:
   [push, workflow_dispatch]
 env:

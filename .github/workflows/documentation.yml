@@ -3,7 +3,7 @@ description: "Generate modern documentation using Doxygen, Sphinx, Breathe, and 
 on:
   [push, workflow_dispatch]
 env:
-  DOXYFILE_PATH: "./docs/Doxyfile"
+  DOXYFILE_PATH: "../docs/Doxyfile"
   DOXYGEN_WORKING_DIRECTORY: "./harmonize"
 
 jobs:

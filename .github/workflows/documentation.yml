@@ -3,8 +3,8 @@ description: "Generate modern documentation using Doxygen, Sphinx, Breathe, and 
 on:
   [push, workflow_dispatch]
 env:
-  DOXYFILE_PATH: ./docs/Doxyfile
-  DOXYGEN_WORKING_DIRECTORY: ./harmonize
+  DOXYFILE_PATH: "./docs/Doxyfile"
+  DOXYGEN_WORKING_DIRECTORY: "./harmonize"
 
 jobs:
   generate_doxygen_documentation:
@@ -18,5 +18,5 @@ jobs:
       - name: Generate Doxygen Documentation
         uses: mattnotmitt/doxygen-action@v1.12
         with:
-          doxyfile-path: $DOXYFILE_PATH
-          working-directory: $DOXYGEN_WORKING_DIRECTORY
+          doxyfile-path: ${{ env.DOXYFILE_PATH }}
+          working-directory: ${{ env.DOXYGEN_WORKING_DIRECTORY }}

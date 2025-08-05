@@ -1,0 +1,29 @@
+name: "DocChain1"
+description: "Generate modern documentation using Doxygen, Sphinx, Breathe, and Fumadocs"
+branding:
+  icon: "book-open"
+  color: "blue"
+on:
+  [push, workflow_dispatch]
+inputs:
+  doxyfile-path:
+    description: "The path to your Doxyfile, relative to your repository root."
+    required: true
+    default: "docs/Doxyfile"
+  doxygen-working-directory:
+    description: "The path to the working directory for Doxygen"
+    required: true
+    default: harmonize/
+
+jobs:
+  generate_doxygen_documentation:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Generate Doxygen Documentation
+        uses: mattnotmitt/doxygen-action#v1.12
+        with:
+          doxyfile-path: ${{ inputs.doxyfile-path }}
+          working_directory: ${{ doxygen-working-directory }}
+

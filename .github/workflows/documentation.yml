@@ -12,11 +12,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - run: pwd
-      - run: ls
-      - run: echo $DOXYGEN_WORKING_DIRECTORY
       - name: Generate Doxygen Documentation
         uses: mattnotmitt/doxygen-action@v1.12
         with:
           doxyfile-path: ${{ env.DOXYFILE_PATH }}
           working-directory: ${{ env.DOXYGEN_WORKING_DIRECTORY }}
+      - run: ls

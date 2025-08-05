@@ -5,15 +5,9 @@ branding:
   color: "blue"
 on:
   [push, workflow_dispatch]
-inputs:
-  doxyfile-path:
-    description: "The path to your Doxyfile, relative to your repository root."
-    required: true
-    default: "docs/Doxyfile"
-  doxygen-working-directory:
-    description: "The path to the working directory for Doxygen"
-    required: true
-    default: harmonize/
+env:
+  DOXYFILE_PATH: docs/Doxyfile
+  DOXYGEN_WORKING_DIRECTORY: /
 
 jobs:
   generate_doxygen_documentation:
@@ -24,6 +18,5 @@ jobs:
       - name: Generate Doxygen Documentation
         uses: mattnotmitt/doxygen-action#v1.12
         with:
-          doxyfile-path: ${{ inputs.doxyfile-path }}
-          working_directory: ${{ doxygen-working-directory }}
-
+          doxyfile-path: $DOXYFILE_PATH
+          working_directory: $DOXYGEN_WORKING_DIRECTORY

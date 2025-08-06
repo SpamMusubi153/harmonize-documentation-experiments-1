@@ -62,9 +62,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Install Sphinx
         run: pip install -U sphinx
-      - run: cd .. && ls
+      # - run: cd .. && ls
       - run: pwd
       - run: ls
       - run: cd docs && ls

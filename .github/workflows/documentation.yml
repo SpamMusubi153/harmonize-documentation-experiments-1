@@ -39,15 +39,14 @@ jobs:
           path: GeneratedDocumentation/html
       - name: Test View
         run: cd GeneratedDocumentation/html && ls
-      - name: Test Create Link-Free Output Version
-        # run: sudo cp -r GeneratedDocumentation/html/ GeneratedDocumentation/Clean_html/ --no-preserve=links
-        # run: find GeneratedDocumentation/html -type l -delete
-        run: sudo touch GeneratedDocumentation/html/.nojekyll
-        shell: bash
-      - name: Test Upload Clean HTML
-        uses: actions/upload-artifact@v4
+      # - name: Test Create Link-Free Output Version
+      #   # run: sudo cp -r GeneratedDocumentation/html/ GeneratedDocumentation/Clean_html/ --no-preserve=links
+      #   # run: find GeneratedDocumentation/html -type l -delete
+      #   run: sudo touch GeneratedDocumentation/html/.nojekyll
+      #   shell: bash
+      - name: Test Pages Upload
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: CleanHTML
           # path: GeneratedDocumentation/Clean_html
           path: GeneratedDocumentation/html
       # - run: cd GeneratedDocumentation && ls
@@ -58,6 +57,6 @@ jobs:
       - name: Test Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         id: deployment
-        with:
-          artifact_name: CleanHTML
+        # with:
+        #   artifact_name: CleanHTML
 

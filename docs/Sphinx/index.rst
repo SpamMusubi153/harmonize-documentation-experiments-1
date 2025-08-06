@@ -15,3 +15,10 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
+.. doxygenindex::
+.. doxygenfunction::
+.. doxygenstruct::
+.. doxygennum::
+.. doxygentypedef::
+.. doxygenclass::
+

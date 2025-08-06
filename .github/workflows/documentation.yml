@@ -17,6 +17,6 @@ jobs:
         with:
           doxyfile-path: ${{ env.DOXYFILE_PATH }}
           working-directory: ${{ env.DOXYGEN_WORKING_DIRECTORY }}
-      - run: ls
+      - run: cd GeneratedDocumentation && ls
       - run: cd GeneratedDocumentation/xml && ls
       - run: cd GeneratedDocumentation/html && ls

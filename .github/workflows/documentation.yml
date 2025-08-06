@@ -77,11 +77,11 @@ jobs:
         with:
           name: DOXYGEN_XML
           path: ./GeneratedDocumentation/xml/
+      - run: cd ./GeneratedDocumentation/xml && ls && cd ..
       - name: Install Sphinx
         run: pip install -U sphinx
       - name: Install Breathe
         run: pip install -U breathe
-      - run: cd ./GeneratedDocumentation && ls && cd ..
       # - run: cd .. && ls
       # - run: pwd
       # - run: ls

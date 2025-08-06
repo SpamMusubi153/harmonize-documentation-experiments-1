@@ -80,7 +80,7 @@ jobs:
       - name: Install Sphinx
         run: pip install -U sphinx
       - name: Install Breathe
-        run: pip install breathe
+        run: pip install -U breathe
       # - run: cd .. && ls
       - run: pwd
       - run: ls

@@ -78,7 +78,7 @@ jobs:
           name: DOXYGEN_XML
           # path: ./GeneratedDocumentation/xml/
           path: ./docs/Sphinx/xml/
-      - run: cd ./GeneratedDocumentation/xml && ls && cd ..
+      # - run: cd ./GeneratedDocumentation/xml && ls && cd ..
       - name: Install Sphinx
         run: pip install -U sphinx
       - name: Install Breathe

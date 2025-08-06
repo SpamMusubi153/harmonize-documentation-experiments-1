@@ -37,6 +37,8 @@ jobs:
         with:
           name: HTML
           path: GeneratedDocumentation/html
+      - name: Test View
+        run: cd GeneratedDocumentation/html && ls
       - name: Test Create Link-Free Output Version
         # run: sudo cp -r GeneratedDocumentation/html/ GeneratedDocumentation/Clean_html/ --no-preserve=links
         run: find GeneratedDocumentation/html -type l -delete

@@ -81,6 +81,7 @@ jobs:
         run: pip install -U sphinx
       - name: Install Breathe
         run: pip install -U breathe
+      - run: cd ./GeneratedDocumentation && ls && cd ..
       # - run: cd .. && ls
       # - run: pwd
       # - run: ls

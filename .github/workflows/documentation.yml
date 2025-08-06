@@ -4,7 +4,7 @@ on:
   [push, workflow_dispatch]
 env:
   DOXYFILE_PATH: "../docs/Doxyfile"
-  DOXYGEN_WORKING_DIRECTORY: "./harmonize"
+  DOXYGEN_WORKING_DIRECTORY: "./harmonize/cpp/"
 
 jobs:
   generate_doxygen_documentation:

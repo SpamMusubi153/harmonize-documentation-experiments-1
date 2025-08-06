@@ -83,7 +83,7 @@ jobs:
       - name: Install Breathe
         run: pip install -U breathe
       - run: pwd
-      - run: cd ~/ && echo pwd
+      - run: cd ~/ && pwd
       # - run: cd .. && ls
       # - run: pwd
       # - run: ls

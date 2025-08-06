@@ -38,12 +38,12 @@ jobs:
           name: HTML
           path: GeneratedDocumentation/html
       - name: Test Create Link-Free Output Version
-        run: sudo mkdir GeneratedDocumentation/Clean_html && rsync -a --no-links GeneratedDocumentation/html GeneratedDocumentation/Clean_html
+        run: sudo mkdir Clean_html && rsync -a --no-links GeneratedDocumentation/html Clean_html
       - name: Test Upload Clean HTML
         uses: actions/upload-artifact@v4
         with:
           name: CleanHTML
-          path: GeneratedDocumentation/Clean_html
+          path: Clean_html
       # - run: cd GeneratedDocumentation && ls
       # - run: cd GeneratedDocumentation/xml && ls
       # - run: cd GeneratedDocumentation/html && ls

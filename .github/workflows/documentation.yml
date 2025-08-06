@@ -38,7 +38,7 @@ jobs:
           name: HTML
           path: GeneratedDocumentation/html
       - name: Test Create Link-Free Output Version
-        run: cp -r GeneratedDocumentation/html/ GeneratedDocumentation/Clean_html/
+        run: sudo cp -r GeneratedDocumentation/html/ GeneratedDocumentation/Clean_html/
       - name: Test Upload Clean HTML
         uses: actions/upload-artifact@v4
         with:

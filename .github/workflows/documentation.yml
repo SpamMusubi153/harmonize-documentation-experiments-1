@@ -82,9 +82,9 @@ jobs:
       - name: Install Breathe
         run: pip install -U breathe
       # - run: cd .. && ls
-      - run: pwd
-      - run: ls
-      - run: cd docs && ls
+      # - run: pwd
+      # - run: ls
+      # - run: cd docs && ls
       - name: Run Sphinx HTML Builder
         run: ${{ env.SPHINXBUILD }} -M html "${{ env.SOURCEDIR }}" "${{ env.BUILDDIR }}"
       - name: Upload Generated HTML

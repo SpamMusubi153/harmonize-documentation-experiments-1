@@ -64,6 +64,7 @@ jobs:
     steps:
       - name: Install Sphinx
         run: pip install -U sphinx
+      - run: pwd && ls
       - name: Run Sphinx HTML Builder
         run: ${{ env.SPHINXBUILD }} -M html "${{ env.SOURCEDIR }}" "${{ env.BUILDDIR }}"
       - name: Upload Generated HTML

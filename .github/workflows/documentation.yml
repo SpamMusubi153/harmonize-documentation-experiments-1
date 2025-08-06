@@ -45,16 +45,15 @@ jobs:
       - name: Test View
         run: cd GeneratedDocumentation/html && ls
 
-      - name: Test - Upload Generated HTML, formatted for GitHub Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: GeneratedDocumentation/html
-
-      # - name: Test Configure GitHub Pages
-      #   uses: actions/configure-pages@v5
-      - name: Test Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-        id: deployment
+      # - name: Test - Upload Generated HTML, formatted for GitHub Pages
+      #   uses: actions/upload-pages-artifact@v3
+      #   with:
+      #     path: GeneratedDocumentation/html
+      # # - name: Test Configure GitHub Pages
+      # #   uses: actions/configure-pages@v5
+      # - name: Test Deploy to GitHub Pages
+      #   uses: actions/deploy-pages@v4
+      #   id: deployment
 
   generate_sphinx_documentation:
 

@@ -3,8 +3,13 @@ description: "Generate modern documentation using Doxygen, Sphinx, Breathe, and 
 on:
   [push, workflow_dispatch]
 env:
-  DOXYFILE_PATH: "docs/Doxyfile"
+  DOXYFILE_PATH: "./docs/Doxygen/Doxyfile"
   DOXYGEN_WORKING_DIRECTORY: "./"
+
+  SPHINXOPTS: ""
+  SPHINXBUILD: sphinx-build
+  SOURCEDIR: "./docs/Sphinx/"
+  BUILDDIR: "./GeneratedDocumentation"
 
 jobs:
   generate_doxygen_documentation:
@@ -50,3 +55,12 @@ jobs:
       - name: Test Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         id: deployment
+
+  generate_sphinx_documentation:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Sphinx
+        run: pip install -U sphinx
+      

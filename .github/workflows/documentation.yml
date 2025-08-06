@@ -61,6 +61,15 @@ jobs:
     needs: generate_doxygen_documentation
     runs-on: ubuntu-latest
 
+    # Experimental Permissions of Test GitHub Pages Deployment
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # End Experimental Permissions
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -76,4 +85,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: SphinxHTML
-          path: ./GeneratedDocumentation
+          path: ./GeneratedDocumentation/html
+      
+        # Test Deploy
+      - name: Test - Upload Generated HTML, formatted for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: GeneratedDocumentation/html
+      - name: Test Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        id: deployment

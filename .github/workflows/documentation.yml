@@ -64,6 +64,7 @@ jobs:
     steps:
       - name: Install Sphinx
         run: pip install -U sphinx
+      - run: cd .. && ls
       - run: pwd
       - run: ls
       - run: cd docs && ls

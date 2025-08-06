@@ -18,7 +18,7 @@ extensions = ["breathe"]
 templates_path = ['_templates']
 exclude_patterns = []
 
-breathe_projects = {"Harmonize C++": "~/GeneratedDocumentation/xml/"}
+breathe_projects = {"Harmonize C++": "./xml/"}
 breathe_default_project = "Harmonize C++"
 
 

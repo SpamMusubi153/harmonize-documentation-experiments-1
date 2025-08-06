@@ -76,7 +76,8 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: DOXYGEN_XML
-          path: ./GeneratedDocumentation/xml/
+          # path: ./GeneratedDocumentation/xml/
+          path: ./docs/Sphinx/xml/
       - run: cd ./GeneratedDocumentation/xml && ls && cd ..
       - name: Install Sphinx
         run: pip install -U sphinx

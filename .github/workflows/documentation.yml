@@ -58,9 +58,16 @@ jobs:
 
   generate_sphinx_documentation:
 
+    needs: generate_doxygen_documentation
     runs-on: ubuntu-latest
 
     steps:
       - name: Install Sphinx
         run: pip install -U sphinx
-      
+      - name: Run Sphinx HTML Builder
+        run: ${{ env.SPHINXBUILD }} -M html "${{ env.SOURCEDIR }}" "${{ env.BUILDDIR }}"
+      - name: Upload Generated HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: SphinxHTML
+          path: ./GeneratedDocumentation

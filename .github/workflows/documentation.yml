@@ -9,6 +9,15 @@ env:
 jobs:
   generate_doxygen_documentation:
     runs-on: ubuntu-latest
+
+    # Experimental Permissions of Test GitHub Pages Deployment
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # End Experimental Permissions
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,3 +40,9 @@ jobs:
       - run: cd GeneratedDocumentation && ls
       - run: cd GeneratedDocumentation/xml && ls
       - run: cd GeneratedDocumentation/html && ls
+      - name: Test Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        id: deployment
+        with:
+          artifact_name: HTML
+

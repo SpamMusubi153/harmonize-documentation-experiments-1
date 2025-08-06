@@ -42,7 +42,7 @@ jobs:
       - name: Test Create Link-Free Output Version
         # run: sudo cp -r GeneratedDocumentation/html/ GeneratedDocumentation/Clean_html/ --no-preserve=links
         # run: find GeneratedDocumentation/html -type l -delete
-        run: touch GeneratedDocumentation/html/.nojekyll
+        run: sudo touch GeneratedDocumentation/html/.nojekyll
         shell: bash
       - name: Test Upload Clean HTML
         uses: actions/upload-artifact@v4

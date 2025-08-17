@@ -84,6 +84,8 @@ jobs:
         run: cp -r docs/Sphinx/* ${{ env.BUILDDIR }}/SphinxWorkspace/
       - name: Copy in Source Files for Sphinx
         run: cp -r ${{ env.SPHINX_SOURCE_DIR }}/* ${{ env.BUILDDIR }}/SphinxWorkspace/
+      - name: Delete - Debug Folder Path Setup
+        run: cd ${{ env.BUILDDIR }}/SphinxWorkspace/ && ls && cd .. && ls && cd .. && ls
       - name: Download Doxygen XML
         uses: actions/download-artifact@v5
         with:

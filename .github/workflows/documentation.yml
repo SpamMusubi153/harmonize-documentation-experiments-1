@@ -3,25 +3,31 @@ description: "Generate modern documentation using Doxygen, Sphinx, Breathe, and 
 on:
   [push, workflow_dispatch]
 env:
-  DOXYFILE_PATH: "./docs/Doxygen/Doxyfile"
+
+  BUILDDIR: "./GeneratedDocumentation"
+
+  DOXYFILE_PATH: "docs/Doxygen/Doxyfile"
   DOXYGEN_WORKING_DIRECTORY: "./"
+  DOXYGEN_SOURCE_DIR: "harmonize/cpp"
+  # TODO: Add configuration paramater to specify the folder path to document.
 
   SPHINXOPTS: ""
+  # The Sphinx command to execute upon builds.
   SPHINXBUILD: sphinx-build
-  SOURCEDIR: "./docs/Sphinx/"
-  BUILDDIR: "./GeneratedDocumentation"
+  SPHINX_SOURCE_DIR: "harmonize/python"
+  
 
 jobs:
   generate_doxygen_documentation:
     runs-on: ubuntu-latest
 
     # Experimental Permissions of Test GitHub Pages Deployment
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    # permissions:
+    #   pages: write
+    #   id-token: write
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deployment.outputs.page_url }}
     # End Experimental Permissions
 
     steps:
@@ -71,14 +77,18 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4 
+        uses: actions/checkout@v4
+      - name: Setup a Workspace for Sphinx to Operate Within
+        run: mkdir -p ${{ env.BUILDDIR }}/SphinxWorkspace
+      - name: Copy in Configuration Files for Sphinx
+        run: cp -r docs/Sphinx/* ${{ env.BUILDDIR }}/SphinxWorkspace/
+      - name: Copy in Source Files for Sphinx
+        run: cp -r ${{ env.SPHINX_SOURCE_DIR }}/* ${{ env.BUILDDIR }}/SphinxWorkspace/
       - name: Download Doxygen XML
         uses: actions/download-artifact@v5
         with:
           name: DoxygenXML
-          # path: ./GeneratedDocumentation/xml/
-          path: ./docs/Sphinx/xml/
-      # - run: cd ./GeneratedDocumentation/xml && ls && cd ..
+          path: ${{ env.BUILDDIR }}/SphinxWorkspace/xml/
       - name: Install Sphinx
         run: pip install -U sphinx
       - name: Install Breathe
@@ -90,12 +100,12 @@ jobs:
       # - run: ls
       # - run: cd docs && ls
       - name: Run Sphinx HTML Builder
-        run: ${{ env.SPHINXBUILD }} -M html "${{ env.SOURCEDIR }}" "${{ env.BUILDDIR }}"
+        run: ${{ env.SPHINXBUILD }} -M html "${{ env.BUILDDIR }}/SphinxWorkspace" "${{ env.BUILDDIR }}"
       - name: Upload Generated HTML
         uses: actions/upload-artifact@v4
         with:
           name: SphinxHTML
-          path: ./GeneratedDocumentation/html
+          path: ${{ env.BUILDDIR }}/html
       
         # Test Deploy
       - name: Test - Upload Generated HTML, formatted for GitHub Pages

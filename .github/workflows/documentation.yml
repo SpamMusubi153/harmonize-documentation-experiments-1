@@ -14,7 +14,8 @@ env:
   SPHINXOPTS: ""
   # The Sphinx command to execute upon builds.
   SPHINXBUILD: sphinx-build
-  SPHINX_SOURCE_DIR: "harmonize/python"
+  SPHINX_PACKAGE_SETUP_COMMAND: ./install.sh
+  # SPHINX_SOURCE_DIR: "harmonize/python"
   
 
 jobs:
@@ -82,8 +83,10 @@ jobs:
         run: mkdir -p ${{ env.BUILDDIR }}/SphinxWorkspace
       - name: Copy in Configuration Files for Sphinx
         run: cp -r docs/Sphinx/* ${{ env.BUILDDIR }}/SphinxWorkspace/
-      - name: Copy in Source Files for Sphinx
-        run: cp -r ${{ env.SPHINX_SOURCE_DIR }}/* ${{ env.BUILDDIR }}/SphinxWorkspace/
+      # - name: Copy in Source Files for Sphinx
+      #   run: cp -r ${{ env.SPHINX_SOURCE_DIR }}/* ${{ env.BUILDDIR }}/SphinxWorkspace/
+      - name: Install and Setup Target Package for Sphinx
+        run: ${{ env.SPHINX_PACKAGE_SETUP_COMMAND }}
       - name: Delete - Debug Folder Path Setup
         run: cd ${{ env.BUILDDIR }}/SphinxWorkspace/ && ls && cd .. && ls && cd .. && ls
       - name: Download Doxygen XML

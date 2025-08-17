@@ -16,6 +16,9 @@ documentation for details.
    :caption: Contents:
 
 ---
+.. automodule:: harmonize
+   :members:
+---
 
 .. doxygenindex::
 .. doxygenfunction::

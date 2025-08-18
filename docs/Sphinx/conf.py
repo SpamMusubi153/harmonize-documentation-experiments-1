@@ -22,8 +22,8 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = []
 
-breathe_projects = {"Harmonize Cpp": "./xml/"}
-breathe_default_project = "Harmonize C++"
+breathe_projects = {"Harmonize cpp": "./xml/"}
+breathe_default_project = "Harmonize cpp"
 
 
 

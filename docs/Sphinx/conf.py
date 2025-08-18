@@ -27,6 +27,8 @@ extensions = [
     
 ]
 
+autosummary_generate = True
+
 templates_path = ['_templates']
 exclude_patterns = []
 

@@ -15,11 +15,10 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
----
 
 .. automodule:: harmonize
    :members:
-   
+
 ---
 
 .. doxygenindex::

@@ -87,6 +87,8 @@ jobs:
       #   run: cp -r ${{ env.SPHINX_SOURCE_DIR }}/* ${{ env.BUILDDIR }}/SphinxWorkspace/
       - name: Install and Setup Target Package for Sphinx
         run: ${{ env.SPHINX_PACKAGE_SETUP_COMMAND }}
+      - name: Delete - Test Import Harmonize
+        run: python -c "import harmonize"
       - name: Delete - Debug Folder Path Setup
         run: cd ${{ env.BUILDDIR }}/SphinxWorkspace/ && ls && cd .. && ls && cd .. && ls
       - name: Download Doxygen XML

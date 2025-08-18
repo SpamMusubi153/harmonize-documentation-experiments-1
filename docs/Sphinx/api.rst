@@ -5,3 +5,7 @@ API
     :toctree: generated
 
     harmonize
+
+
+.. automodule:: harmonize
+    :members:

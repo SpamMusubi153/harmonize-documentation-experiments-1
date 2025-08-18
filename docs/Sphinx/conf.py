@@ -10,10 +10,10 @@ project = 'Harmonize'
 copyright = '2025, -'
 author = '-'
 
-# Add ability to import code
-import sync_dispatch
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+# Add ability to import code, if code isn't installable.
+# import sync_dispatch
+# from pathlib import Path
+# sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

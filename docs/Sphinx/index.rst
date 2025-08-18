@@ -16,17 +16,9 @@ documentation for details.
    :caption: Contents:
 
    api
+   cpp
 
 
 .. .. automodule:: harmonize
 ..    :members:
-
----
-
-.. doxygenindex::
-.. doxygenfunction::
-.. doxygenstruct::
-.. doxygennum::
-.. doxygentypedef::
-.. doxygenclass::
 

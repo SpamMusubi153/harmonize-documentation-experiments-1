@@ -10,13 +10,21 @@ project = 'Harmonize'
 copyright = '2025, -'
 author = '-'
 
+# Add ability to import code
+import sync_dispatch
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
+    "sphinx.ext.duration",
+
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
-    # "breathe"
+    # "breathe",
+    
 ]
 
 templates_path = ['_templates']
@@ -24,6 +32,7 @@ exclude_patterns = []
 
 breathe_projects = {"Harmonize cpp": "./xml/"}
 breathe_default_project = "Harmonize cpp"
+
 
 
 

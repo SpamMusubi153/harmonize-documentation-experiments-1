@@ -15,9 +15,11 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
+   api
 
-.. automodule:: harmonize
-   :members:
+
+.. .. automodule:: harmonize
+..    :members:
 
 ---
 

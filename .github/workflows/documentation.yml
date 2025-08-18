@@ -106,6 +106,8 @@ jobs:
       # - run: pwd
       # - run: ls
       # - run: cd docs && ls
+      - name: Autogenerate Sphinx Pages
+        run: sphinx-autogen -o "${{ env.BUILDDIR }}"/SphinxWorkspace/modules "${{ env.BUILDDIR }}/SphinxWorkspace/*.rst"
       - name: Run Sphinx HTML Builder
         run: ${{ env.SPHINXBUILD }} -M html "${{ env.BUILDDIR }}/SphinxWorkspace" "${{ env.BUILDDIR }}"
       - name: Upload Generated HTML

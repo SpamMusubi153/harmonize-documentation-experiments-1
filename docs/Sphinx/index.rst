@@ -18,7 +18,6 @@ documentation for details.
    api
    cpp
 
-
 .. .. automodule:: harmonize
 ..    :members:
 

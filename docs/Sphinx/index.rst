@@ -17,4 +17,4 @@ documentation for details.
 
    api
    cpp
-   module/module.rst
+   module/modules.rst

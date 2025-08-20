@@ -16,6 +16,7 @@ documentation for details.
    :caption: Contents:
 
    api
+   api2
    cpp
 
 .. .. automodule:: harmonize

@@ -8,5 +8,5 @@ API
     harmonize
 
 
-.. automodule:: harmonize.runtime
+.. automodule:: harmonize.python.runtime
     :members:

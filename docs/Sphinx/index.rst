@@ -18,6 +18,7 @@ documentation for details.
    api
    apib
    cpp
+   harmonize
 
 .. .. automodule:: harmonize
 ..    :members:

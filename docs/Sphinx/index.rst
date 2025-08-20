@@ -16,10 +16,5 @@ documentation for details.
    :caption: Contents:
 
    api
-   apib
    cpp
-   harmonize
-
-.. .. automodule:: harmonize
-..    :members:
-
+   module/module.rst

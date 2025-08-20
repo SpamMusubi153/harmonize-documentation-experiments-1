@@ -23,7 +23,7 @@ extensions = [
 
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
-    # "breathe",
+    "breathe",
     
 ]
 

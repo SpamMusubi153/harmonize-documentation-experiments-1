@@ -18,6 +18,9 @@ author = '-'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
+import sys
+sys.path.insert(0, "../../harmonize")
+
 extensions = [
     "sphinx.ext.duration",
 

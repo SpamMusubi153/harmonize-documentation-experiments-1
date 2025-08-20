@@ -111,7 +111,7 @@ jobs:
       - name: Autogenerate Sphinx Pages
         run: sphinx-apidoc --implicit-namespaces --separate -o "${{ env.BUILDDIR }}/SphinxWorkspace/module" harmonize/
       - name: Test
-        run: cd "${{ env.BUILDDIR }}/SphinxWorkspace/module" && ls && cat harmonize.adapt.python.rst && cd ../../..
+        run: cd "${{ env.BUILDDIR }}/SphinxWorkspace/module" && ls && cat harmonize.python.adapt.rst && cd ../../..
       - name: Run Sphinx HTML Builder
         run: ${{ env.SPHINXBUILD }} -M html "${{ env.BUILDDIR }}/SphinxWorkspace" "${{ env.BUILDDIR }}"
       - name: Upload Generated HTML

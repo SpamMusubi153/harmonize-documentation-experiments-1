@@ -125,7 +125,7 @@ jobs:
       - name: Upload Generated JSON
         uses: actions/upload-artifact@v4
         with:
-          name: SphinxHTML
+          name: SphinxJSON
           path: ${{ env.BUILDDIR }}/json
         # Test Deploy
       - name: Test - Upload Generated HTML, formatted for GitHub Pages

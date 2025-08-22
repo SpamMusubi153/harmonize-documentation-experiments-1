@@ -109,10 +109,10 @@ jobs:
       # - name: Autogenerate Sphinx Pages
       #   run: sphinx-autogen -o "${{ env.BUILDDIR }}"/SphinxWorkspace/modules "${{ env.BUILDDIR }}/SphinxWorkspace/api.rst"
       - name: Autogenerate Sphinx Pages
-        run: sphinx-apidoc --implicit-namespaces --separate -o "${{ env.BUILDDIR }}/SphinxWorkspace/module" harmonize/
+        run: sphinx-apidoc --implicit-namespaces --separate -o "${{ env.BUILDDIR }}/SphinxWorkspace/pythonAPI" harmonize/
       - name: Test
-        run: cd "${{ env.BUILDDIR }}/SphinxWorkspace/" && ls && cd ../..
-        # run: cd "${{ env.BUILDDIR }}/SphinxWorkspace/pythonAPI" && ls && cat harmonize.python.adapt.rst && cd ../../..
+        # run: cd "${{ env.BUILDDIR }}/SphinxWorkspace/" && ls && cd ../..
+        run: cd "${{ env.BUILDDIR }}/SphinxWorkspace/pythonAPI" && ls && cat harmonize.python.adapt.rst && cd ../../..
       - name: Run Sphinx HTML Builder
         run: ${{ env.SPHINXBUILD }} -M html "${{ env.BUILDDIR }}/SphinxWorkspace" "${{ env.BUILDDIR }}"
       - name: Upload Generated HTML

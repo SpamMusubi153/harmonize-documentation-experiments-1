@@ -17,4 +17,4 @@ documentation for details.
 
    api
    cpp
-   module/modules.rst
+   pythonAPI/modules.rst

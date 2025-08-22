@@ -120,7 +120,13 @@ jobs:
         with:
           name: SphinxHTML
           path: ${{ env.BUILDDIR }}/html
-      
+      - name: Run Sphinx JSON Builder
+        run: ${{ env.SPHINXBUILD }} -M json "${{ env.BUILDDIR }}/SphinxWorkspace" "${{ env.BUILDDIR }}"
+      - name: Upload Generated JSON
+        uses: actions/upload-artifact@v4
+        with:
+          name: SphinxHTML
+          path: ${{ env.BUILDDIR }}/json
         # Test Deploy
       - name: Test - Upload Generated HTML, formatted for GitHub Pages
         uses: actions/upload-pages-artifact@v3

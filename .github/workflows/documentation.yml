@@ -49,8 +49,6 @@ jobs:
         with:
           name: RawDoxygenHTML
           path: GeneratedDocumentation/html
-      - name: Test View
-        run: cd GeneratedDocumentation/html && ls
 
       # - name: Test - Upload Generated HTML, formatted for GitHub Pages
       #   uses: actions/upload-pages-artifact@v3
@@ -85,41 +83,23 @@ jobs:
         run: cp -r docs/Sphinx/* ${{ env.BUILDDIR }}/SphinxWorkspace/
       # - name: Copy in Source Files for Sphinx
       #   run: cp -r ${{ env.SPHINX_SOURCE_DIR }}/* ${{ env.BUILDDIR }}/SphinxWorkspace/
-      - name: Install and Setup Target Package for Sphinx
-        run: ${{ env.SPHINX_PACKAGE_SETUP_COMMAND }}
-      - name: Delete - Test Import Harmonize
-        run: python -c "import harmonize"
-      - name: Delete - Debug Folder Path Setup
-        run: cd ${{ env.BUILDDIR }}/SphinxWorkspace/ && ls && cd .. && ls && cd .. && ls
+      # - name: Install and Setup Target Package for Sphinx
+      #  # As we have switched to using `sphinx-autodoc2`, it is no longer necessary to install the package.
+      #   run: ${{ env.SPHINX_PACKAGE_SETUP_COMMAND }}
       - name: Download Doxygen XML
         uses: actions/download-artifact@v5
         with:
           name: DoxygenXML
           path: ${{ env.BUILDDIR }}/SphinxWorkspace/xml/
-      - name: Install Sphinx
-        run: pip install -U sphinx
-      - name: Install Breathe
-        run: pip install -U breathe
-      - run: pwd
-      # - run: cd ~/ && pwd
-      # - run: cd .. && ls
-      # - run: pwd
-      # - run: ls
-      # - run: cd docs && ls
-      # - name: Autogenerate Sphinx Pages
-      #   run: sphinx-autogen -o "${{ env.BUILDDIR }}"/SphinxWorkspace/modules "${{ env.BUILDDIR }}/SphinxWorkspace/api.rst"
-      - name: Autogenerate Sphinx Pages
-        run: sphinx-apidoc --implicit-namespaces --separate -o "${{ env.BUILDDIR }}/SphinxWorkspace/pythonAPI" harmonize/
-      - name: Test
-        # run: cd "${{ env.BUILDDIR }}/SphinxWorkspace/" && ls && cd ../..
-        run: cd "${{ env.BUILDDIR }}/SphinxWorkspace/pythonAPI" && ls && cat harmonize.python.adapt.rst && cd ../../..
-      - name: Run Sphinx HTML Builder
-        run: ${{ env.SPHINXBUILD }} -M html "${{ env.BUILDDIR }}/SphinxWorkspace" "${{ env.BUILDDIR }}"
-      - name: Upload Generated HTML
-        uses: actions/upload-artifact@v4
-        with:
-          name: SphinxHTML
-          path: ${{ env.BUILDDIR }}/html
+      - name: Install Sphinx and MyST Parser (To Parse MyST Markdown)
+        run: pip install -U sphinx myst-parser
+      - name: Install the Breathe and Sphinx-Autodoc2 Sphinx Extensions
+        run: pip install -U breathe sphinx-autodoc2
+      - name: Autogenerate Sphinx Python API Pages
+        # Generation of Python API documentation pages is no longer necessary, as this is now done automatically by `sphinx-autodoc2`.
+        # run: sphinx-apidoc --implicit-namespaces --separate -o "${{ env.BUILDDIR }}/SphinxWorkspace/pythonAPI" harmonize/
+      - name: Autogenerate Breathe-Sphinx C++ API Pages
+        run: breathe-apidoc -g class,struct,union,file -o ${{ env.BUILDDIR }}/SphinxWorkspace/cppAPI/ ${{ env.BUILDDIR }}/SphinxWorkspace/xml/
       - name: Run Sphinx JSON Builder
         run: ${{ env.SPHINXBUILD }} -M json "${{ env.BUILDDIR }}/SphinxWorkspace" "${{ env.BUILDDIR }}"
       - name: Upload Generated JSON
@@ -127,7 +107,16 @@ jobs:
         with:
           name: SphinxJSON
           path: ${{ env.BUILDDIR }}/json
-        # Test Deploy
+
+      # Test Actions for GitHub Pages Upload. These should be disabled in production.
+      - name: Run Sphinx HTML Builder
+        run: ${{ env.SPHINXBUILD }} -M html "${{ env.BUILDDIR }}/SphinxWorkspace" "${{ env.BUILDDIR }}"
+      - name: Upload Generated HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: SphinxHTML
+          path: ${{ env.BUILDDIR }}/html
+      # Test Deploy
       - name: Test - Upload Generated HTML, formatted for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:

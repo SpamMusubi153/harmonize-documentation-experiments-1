@@ -62,7 +62,7 @@ jobs:
 
   generate_sphinx_documentation_02:
 
-    needs: generate_doxygen_documentation
+    needs: generate_doxygen_documentation_01
     runs-on: ubuntu-latest
 
     # Experimental Permissions of Test GitHub Pages Deployment

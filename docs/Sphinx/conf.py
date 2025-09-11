@@ -10,35 +10,42 @@ project = 'Harmonize'
 copyright = '2025, -'
 author = '-'
 
-# Add ability to import code, if code isn't installable.
-# import sync_dispatch
-# from pathlib import Path
-# sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-
-import sys
-sys.path.insert(0, "../../harmonize")
 
 extensions = [
     "sphinx.ext.duration",
 
-    "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
     "breathe",
-    
-]
+    "myst_parser",
+    "autodoc2"
 
-autosummary_generate = True
+    # Formerly Utilized Extensions:
+    # "sphinx.ext.autodoc",
+    # "sphinx.ext.autosummary",
+]
 
 templates_path = ['_templates']
 exclude_patterns = []
 
+# 
+# Breathe Configuration
+# 
 breathe_projects = {"Harmonize cpp": "./xml/"}
 breathe_default_project = "Harmonize cpp"
 
+# 
+# Autodoc 2 Configuration
+# 
+autodoc2_sort_names = True
+autodoc2_packages = [
+    "../../python/harmonize/"
+]
 
+# Configure autodoc2 to interpret all docstrings as Markdown.
+autodoc2_docstring_parser_regexes = [
+    (r".*", "myst")
+]
 
 
 # -- Options for HTML output -------------------------------------------------

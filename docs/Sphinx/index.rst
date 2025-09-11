@@ -15,6 +15,9 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
-   api
-   cpp
-   pythonAPI/modules.rst
+   apidocs/index
+
+   cppAPI/classlist
+   cppAPI/filelist
+   cppAPI/structlist
+   cppAPI/unionlist

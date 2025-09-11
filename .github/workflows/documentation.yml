@@ -139,7 +139,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     # End Permissions
 
-
     
     steps:
       - name: Checkout Repository
@@ -161,10 +160,10 @@ jobs:
           path: SphinxJSON/
 
       # Organize C++ API Folder Index Files
-      - run: SphinxJSON/cppAPI/classlist.fjson SphinxJSON/cppAPI/class/index.fjson
-      - run: SphinxJSON/cppAPI/filelist.fjson SphinxJSON/cppAPI/file/index.fjson
-      - run: SphinxJSON/cppAPI/structlist.fjson SphinxJSON/cppAPI/struct/index.fjson
-      - run: SphinxJSON/cppAPI/unionlist.fjson SphinxJSON/cppAPI/union/index.fjson
+      - run: mv SphinxJSON/cppAPI/classlist.fjson SphinxJSON/cppAPI/class/index.fjson
+      - run: mv SphinxJSON/cppAPI/filelist.fjson SphinxJSON/cppAPI/file/index.fjson
+      - run: mv SphinxJSON/cppAPI/structlist.fjson SphinxJSON/cppAPI/struct/index.fjson
+      - run: mv SphinxJSON/cppAPI/unionlist.fjson SphinxJSON/cppAPI/union/index.fjson
 
       - name: Move Python API JSON Files into Fumadocs
         run: mv SphinxJSON/apidocs/harmonize/* ${{ env.BUILDDIR }}/content/docs/pythonAPI/

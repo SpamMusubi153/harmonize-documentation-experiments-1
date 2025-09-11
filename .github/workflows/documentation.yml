@@ -19,7 +19,7 @@ env:
   
 
 jobs:
-  01_generate_doxygen_documentation:
+  generate_doxygen_documentation_01:
     runs-on: ubuntu-latest
 
     # Experimental Permissions of Test GitHub Pages Deployment
@@ -60,7 +60,7 @@ jobs:
       #   uses: actions/deploy-pages@v4
       #   id: deployment
 
-  02_generate_sphinx_documentation:
+  generate_sphinx_documentation_02:
 
     needs: generate_doxygen_documentation
     runs-on: ubuntu-latest

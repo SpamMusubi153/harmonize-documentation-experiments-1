@@ -95,9 +95,9 @@ jobs:
         run: pip install -U sphinx myst-parser
       - name: Install the Breathe and Sphinx-Autodoc2 Sphinx Extensions
         run: pip install -U breathe sphinx-autodoc2
-      - name: Autogenerate Sphinx Python API Pages
-        # Generation of Python API documentation pages is no longer necessary, as this is now done automatically by `sphinx-autodoc2`.
-        # run: sphinx-apidoc --implicit-namespaces --separate -o "${{ env.BUILDDIR }}/SphinxWorkspace/pythonAPI" harmonize/
+      # Generation of Python API documentation pages is no longer necessary, as this is now done automatically by `sphinx-autodoc2`.
+      # - name: Autogenerate Sphinx Python API Pages
+      #   run: sphinx-apidoc --implicit-namespaces --separate -o "${{ env.BUILDDIR }}/SphinxWorkspace/pythonAPI" harmonize/
       - name: Autogenerate Breathe-Sphinx C++ API Pages
         run: breathe-apidoc -g class,struct,union,file -o ${{ env.BUILDDIR }}/SphinxWorkspace/cppAPI/ ${{ env.BUILDDIR }}/SphinxWorkspace/xml/
       - name: Run Sphinx JSON Builder

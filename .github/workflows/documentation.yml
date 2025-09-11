@@ -65,14 +65,14 @@ jobs:
     needs: generate_doxygen_documentation_01
     runs-on: ubuntu-latest
 
-    # Experimental Permissions of Test GitHub Pages Deployment
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    # End Experimental Permissions
+    # # Experimental Permissions of Test GitHub Pages Deployment
+    # permissions:
+    #   pages: write
+    #   id-token: write
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deployment.outputs.page_url }}
+    # # End Experimental Permissions
 
     steps:
       - name: Checkout Repository
@@ -108,19 +108,84 @@ jobs:
           name: 02A.SphinxJSON
           path: ${{ env.BUILDDIR }}/json
 
-      # Test Actions for GitHub Pages Upload. These should be disabled in production.
-      - name: Run Sphinx HTML Builder
-        run: ${{ env.SPHINXBUILD }} -M html "${{ env.BUILDDIR }}/SphinxWorkspace" "${{ env.BUILDDIR }}"
-      - name: Upload Generated HTML
-        uses: actions/upload-artifact@v4
+      # # Test Actions for GitHub Pages Upload. These should be disabled in production.
+      # - name: Run Sphinx HTML Builder
+      #   run: ${{ env.SPHINXBUILD }} -M html "${{ env.BUILDDIR }}/SphinxWorkspace" "${{ env.BUILDDIR }}"
+      # - name: Upload Generated HTML
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: 02B.SphinxHTML
+      #     path: ${{ env.BUILDDIR }}/html
+      # # Test Deploy
+      # - name: Test - Upload Generated HTML, formatted for GitHub Pages
+      #   uses: actions/upload-pages-artifact@v3
+      #   with:
+      #     path: GeneratedDocumentation/html
+      # - name: Test Deploy to GitHub Pages
+      #   uses: actions/deploy-pages@v4
+      #   id: deployment
+
+  generate_fumadocs_documentation_03:
+
+    needs: generate_sphinx_documentation_02
+    runs-on: ubuntu-latest
+
+    # Permissions for Test GitHub Pages Deployment
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # End Permissions
+
+
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
         with:
-          name: 02B.SphinxHTML
-          path: ${{ env.BUILDDIR }}/html
-      # Test Deploy
-      - name: Test - Upload Generated HTML, formatted for GitHub Pages
+          submodules: true
+      - name: Setup a Workspace for Fumadocs to Operate Within
+        run: mkdir -p ${{ env.BUILDDIR }}
+      - name: Copy In Fumadocs Source Files
+        run: cp -r docs/Fumadocs/harmonize/* ${{ env.BUILDDIR }}
+
+      # 
+      # This section contains commands to orchestrate the moving and organization of files into Fumadocs.
+      # 
+      - name: Download Sphinx JSON
+        uses: actions/download-artifact@v5
+        with:
+          name: 02A.SphinxJSON
+          path: SphinxJSON/
+
+      # Organize C++ API Folder Index Files
+      - run: SphinxJSON/cppAPI/classlist.fjson SphinxJSON/cppAPI/class/index.fjson
+      - run: SphinxJSON/cppAPI/filelist.fjson SphinxJSON/cppAPI/file/index.fjson
+      - run: SphinxJSON/cppAPI/structlist.fjson SphinxJSON/cppAPI/struct/index.fjson
+      - run: SphinxJSON/cppAPI/unionlist.fjson SphinxJSON/cppAPI/union/index.fjson
+
+      - name: Move Python API JSON Files into Fumadocs
+        run: mv SphinxJSON/apidocs/harmonize/* ${{ env.BUILDDIR }}/content/docs/pythonAPI/
+      - name: Move C++ API JSON Files into Fumadocs
+        run: mv SphinxJSON/cppAPI/* ${{ env.BUILDDIR }}/content/docs/cppAPI/
+      
+      #
+      # Build Next.js/Fumadocs Static Site
+      # 
+      - name: Prepare Environment Dependencies
+        run: cd ${{ env.BUILDDIR }} && npm ci
+      - name: Build Next.js/Fumadocs Static Site
+        run: cd ${{ env.BUILDDIR }} && npx --no-install next build
+      
+
+
+
+      - name: Uploaded the Generated HTML in a Special Format for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: GeneratedDocumentation/html
+          path: ${{ env.BUILDDIR }}/out
       - name: Test Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         id: deployment

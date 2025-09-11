@@ -19,7 +19,7 @@ env:
   
 
 jobs:
-  generate_doxygen_documentation:
+  01_generate_doxygen_documentation:
     runs-on: ubuntu-latest
 
     # Experimental Permissions of Test GitHub Pages Deployment
@@ -42,12 +42,12 @@ jobs:
       - name: Upload Generated XML
         uses: actions/upload-artifact@v4
         with:
-          name: DoxygenXML
+          name: 01A.DoxygenXML
           path: GeneratedDocumentation/xml
       - name: Upload Generated HTML
         uses: actions/upload-artifact@v4
         with:
-          name: RawDoxygenHTML
+          name: 01B.RawDoxygenHTML
           path: GeneratedDocumentation/html
 
       # - name: Test - Upload Generated HTML, formatted for GitHub Pages
@@ -60,7 +60,7 @@ jobs:
       #   uses: actions/deploy-pages@v4
       #   id: deployment
 
-  generate_sphinx_documentation:
+  02_generate_sphinx_documentation:
 
     needs: generate_doxygen_documentation
     runs-on: ubuntu-latest
@@ -105,7 +105,7 @@ jobs:
       - name: Upload Generated JSON
         uses: actions/upload-artifact@v4
         with:
-          name: SphinxJSON
+          name: 02A.SphinxJSON
           path: ${{ env.BUILDDIR }}/json
 
       # Test Actions for GitHub Pages Upload. These should be disabled in production.
@@ -114,7 +114,7 @@ jobs:
       - name: Upload Generated HTML
         uses: actions/upload-artifact@v4
         with:
-          name: SphinxHTML
+          name: 02B.SphinxHTML
           path: ${{ env.BUILDDIR }}/html
       # Test Deploy
       - name: Test - Upload Generated HTML, formatted for GitHub Pages

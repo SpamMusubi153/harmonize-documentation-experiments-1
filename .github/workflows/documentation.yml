@@ -1,9 +1,10 @@
 name: "DocChain1"
 description: "Generate modern documentation using Doxygen, Sphinx, Breathe, and Fumadocs"
 on:
-  [push, workflow_dispatch]
-env:
+  push:
+  workflow_dispatch:
 
+env:
   BUILDDIR: "./GeneratedDocumentation"
 
   DOXYFILE_PATH: "docs/Doxygen/Doxyfile"

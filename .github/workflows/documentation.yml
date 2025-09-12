@@ -149,8 +149,10 @@ jobs:
         run: mkdir -p ${{ env.BUILDDIR }}
       - name: Copy In Fumadocs Source Files
         run: cp -r docs/Fumadocs/harmonize/* ${{ env.BUILDDIR }}
-      - name: Inject Current Repository Name as the Next.js `basepath`
+      - name: Inject the Current Repository Name as the Next.js `basepath`
         run: sed -i 's|basePath[:] ".*"|basePath:"/${{ github.event.repository.name }}"|' '${{ env.BUILDDIR }}/next.config.mjs'
+      - name: Inject the Current Repository Name into the Search Provider Path
+        run: sed -i 's|from[:] ".*"|from:"/${{ github.event.repository.name }}/api/search"|' '${{ env.BUILDDIR }}/src/app/components/search.tsx'
         
       #
       # This section contains commands to orchestrate the moving and organization of files into Fumadocs.

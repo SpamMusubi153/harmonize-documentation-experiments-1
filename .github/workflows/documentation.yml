@@ -1,9 +1,10 @@
 name: "DocChain1"
 description: "Generate modern documentation using Doxygen, Sphinx, Breathe, and Fumadocs"
 on:
-  [push, workflow_dispatch]
-env:
+  push:
+  workflow_dispatch:
 
+env:
   BUILDDIR: "./GeneratedDocumentation"
 
   DOXYFILE_PATH: "docs/Doxygen/Doxyfile"
@@ -19,17 +20,8 @@ env:
   
 
 jobs:
-  generate_doxygen_documentation_01:
+  _01_generate_doxygen_documentation:
     runs-on: ubuntu-latest
-
-    # Experimental Permissions of Test GitHub Pages Deployment
-    # permissions:
-    #   pages: write
-    #   id-token: write
-    # environment:
-    #   name: github-pages
-    #   url: ${{ steps.deployment.outputs.page_url }}
-    # End Experimental Permissions
 
     steps:
       - name: Checkout Repository
@@ -56,23 +48,11 @@ jobs:
       #     path: GeneratedDocumentation/html
       # # - name: Test Configure GitHub Pages
       # #   uses: actions/configure-pages@v5
-      # - name: Test Deploy to GitHub Pages
-      #   uses: actions/deploy-pages@v4
-      #   id: deployment
 
-  generate_sphinx_documentation_02:
+  _02_generate_sphinx_documentation:
 
-    needs: generate_doxygen_documentation_01
+    needs: _01_generate_doxygen_documentation
     runs-on: ubuntu-latest
-
-    # # Experimental Permissions of Test GitHub Pages Deployment
-    # permissions:
-    #   pages: write
-    #   id-token: write
-    # environment:
-    #   name: github-pages
-    #   url: ${{ steps.deployment.outputs.page_url }}
-    # # End Experimental Permissions
 
     steps:
       - name: Checkout Repository
@@ -121,25 +101,12 @@ jobs:
       #   uses: actions/upload-pages-artifact@v3
       #   with:
       #     path: GeneratedDocumentation/html
-      # - name: Test Deploy to GitHub Pages
-      #   uses: actions/deploy-pages@v4
-      #   id: deployment
 
-  generate_fumadocs_documentation_03:
+  _03_generate_fumadocs_documentation:
 
-    needs: generate_sphinx_documentation_02
+    needs: _02_generate_sphinx_documentation
     runs-on: ubuntu-latest
 
-    # Permissions for Test GitHub Pages Deployment
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    # End Permissions
-
-    
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -149,6 +116,8 @@ jobs:
         run: mkdir -p ${{ env.BUILDDIR }}
       - name: Copy In Fumadocs Source Files
         run: cp -r docs/Fumadocs/harmonize/* ${{ env.BUILDDIR }}
+      - name: Copy In User-Created Content Files
+        run: cp -r docs/Content/* ${{ env.BUILDDIR }}
       - name: Inject the Current Repository Name as the Next.js `basepath`
         run: sed -i 's|basePath[:] ".*"|basePath:"/${{ github.event.repository.name }}"|' '${{ env.BUILDDIR }}/next.config.mjs'
       - name: Inject the Current Repository Name into the Search Provider Path
@@ -182,13 +151,35 @@ jobs:
       - name: Build Next.js/Fumadocs Static Site
         run: cd ${{ env.BUILDDIR }} && npx --no-install next build
       
-
-
-
+      # 
+      # Upload Results
+      # 
+      - name: Upload Generated HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: 03A.FumadocsHTML
+          path: ${{ env.BUILDDIR }}/out
       - name: Uploaded the Generated HTML in a Special Format for GitHub Pages
         uses: actions/upload-pages-artifact@v3
         with:
           path: ${{ env.BUILDDIR }}/out
-      - name: Test Deploy to GitHub Pages
+
+  _04_publish_to_github_pages:
+
+    needs: _03_generate_fumadocs_documentation
+    runs-on: ubuntu-latest
+
+    # Permissions for Test GitHub Pages Deployment
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # End Permissions
+
+    # Deploy and Publish to GitHub Pages
+    steps:
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
         id: deployment

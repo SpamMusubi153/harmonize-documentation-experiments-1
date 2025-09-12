@@ -115,6 +115,8 @@ jobs:
         run: mkdir -p ${{ env.BUILDDIR }}
       - name: Copy In Fumadocs Source Files
         run: cp -r docs/Fumadocs/harmonize/* ${{ env.BUILDDIR }}
+      - name: Copy In User-Created Content Files
+        run: cp -r docs/Content/* ${{ env.BUILDDIR }}
       - name: Inject the Current Repository Name as the Next.js `basepath`
         run: sed -i 's|basePath[:] ".*"|basePath:"/${{ github.event.repository.name }}"|' '${{ env.BUILDDIR }}/next.config.mjs'
       - name: Inject the Current Repository Name into the Search Provider Path

@@ -3,12 +3,14 @@
     "description": "",
     "root": true,
     "pages": [
-        "---Introduction---",
-        "index",
-        "test",
+        "---Getting Started---",
+        "...(gettingStarted)",
+        
         "---Full API Reference---",
         "pythonAPI",
         "cppAPI",
+        "---About the Project---",
+        "...(aboutTheProject)",
         "---Additional Pages---",
         "..."
     ]

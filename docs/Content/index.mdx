@@ -3,16 +3,16 @@ title: Welcome to Harmonize!
 description: A first introduction to the Harmonize GPU execution framework.
 ---
 
-import { GithubInfo } from 'fumadocs-ui/components/github-info';
-import { HardDriveDownload, Github, FileCode } from 'luicide-react';
+{/*import { GithubInfo } from 'fumadocs-ui/components/github-info';*/}
+import { HardDriveDownload, Github, FileCode } from 'lucide-react';
 
-<GithubInfo owner="CEMeNT-PSAAP" repo="harmonize" className="lg:-mx-2" />
+{/*<GithubInfo owner="CEMeNT-PSAAP" repo="harmonize" className="lg:-mx-2" />*/}
 
-# Welcome!
+{/*# Welcome!*/}
 
 Harmonize is an execution framework for GPU that exposes the parallel processing capabilities of GPUs through **asynchronous (async) processing calls**.
 
-It aims to improve program performance while decreating your development burden, especially **when your project required complex processing tasks**.
+It aims to improve program performance while decreating your development burden, especially **when your project requires complex processing tasks**.
 
 In short, Harmonize is desined to help you **parallelize more of your projects without requiring you to be an expert at writing GPU code** (such as [CUDA](https://docs.nvidia.com/cuda/doc/index.html) or [ROCm/HIP](https://www.amd.com/en/products/software/rocm.html)).
 
@@ -47,7 +47,7 @@ The Harmonize workflow requires a two-step approach to running code:
     With our framework developers optimizing this conversion process, you'll get to running much [faster](https://blog.melashri.net/posts/i-hate-cuda/) through our streamlined developer experience.
 
 
-
+<figcaption>Here's what the Harmonize Workflow Looks Like:</figcaption>
 <Mermaid
 chart='
 flowchart LR
@@ -67,9 +67,7 @@ flowchart LR
 <li>- Concretely identifies what and when to execute code for a specific environment.</li>
     `")
 '/>
-<figcaption>
-  Here's what the Harmonize Workflow Looks Like
-</figcaption>
+{/**/}
 
 #### A Note on Program Types
 
@@ -86,26 +84,26 @@ Likewise, as long as the interface between the specification and the program typ
 
 <Cards>
   <Card
-    href="/docs/installation",
-    title="Install Harmonize",
+    href="/docs/installation"
+    title="Install Harmonize"
     icon={<HardDriveDownload />}
   >Learn how to Install Harmonize</Card>
 
   <Card
-    href="https://github.com/CEMeNT-PSAAP/harmonize/tree/main/examples",
-    title="Harmonize Examples",
+    href="https://github.com/CEMeNT-PSAAP/harmonize/tree/main/examples"
+    title="Harmonize Examples"
     icon={<Github />}
   >View Harmonize Examples on GitHub</Card>
   
   <Card
-    href="/docs/pythonAPI",
-    title="Harmonize Python API",
+    href="/docs/pythonAPI"
+    title="Harmonize Python API"
     icon={<FileCode />}
   >Browse the full Python API</Card>
 
   <Card
-    href="/docs/cppAPI",
-    title="Harmonize C++ API",
+    href="/docs/cppAPI"
+    title="Harmonize C++ API"
     icon={<FileCode />}
   >Browse the full C++ API</Card>
 </Cards>

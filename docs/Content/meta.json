@@ -4,14 +4,14 @@
     "root": true,
     "pages": [
         "---Getting Started---",
+        "./(gettingStarted)/index",
         "...(gettingStarted)",
         
         "---Full API Reference---",
         "pythonAPI",
         "cppAPI",
-        "---About the Project---",
-        "...(aboutTheProject)",
-        "---Additional Pages---",
+        "---More from Harmonize---",
+        "aboutTheProject"
         "..."
     ]
 }

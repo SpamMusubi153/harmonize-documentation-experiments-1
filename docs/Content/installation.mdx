@@ -19,7 +19,7 @@ We're looking forward to hearing about what you build!
 
 <Steps>
 
-<!-- Begin Step 1 -->
+{/* Begin Step 1 */}
 <Step>
 
 ## Install Your GPU Toolkit
@@ -34,7 +34,7 @@ Because Harmonize works much closer to low-level GPU hardware than most programs
     <Tab value="AMD">
     Install Version 6.0.0 of AMD's ROCm Toolkit
     </Tab>
-<Tabs>
+</Tabs>
 
 Also, make sure you have the CUDA runtime (host and device).
 
@@ -64,7 +64,7 @@ Also, make sure you have the CUDA runtime (host and device).
 
 </Step>
 
-<!-- Begin Step 2 -->
+{/* Begin Step 2 */}
 <Step>
 
 ## Dependencies
@@ -80,7 +80,7 @@ Python installations require installation of the following packages
     <Tab value="bash">
     pip install numpy llvmlite
     </Tab>
-<Tabs>
+</Tabs>
 
 Python Installations also need the appropriate version of Numba based on your GPU Manufacture:
 
@@ -97,20 +97,20 @@ Python Installations also need the appropriate version of Numba based on your GP
     pip config set global.extra-index-url https://test.pypi.org/simple
     pip install "numba-hip[rocm-6-1-2,test] @ git+https://github.com/ROCm/numba-hip.git"
     </Tab>
-<Tabs>
+</Tabs>
 
 </Step>
 
 </Steps>
 
 
-<!-- <Tabs groupId="language" items={["C++", "Python"]} persist>
+{/*<Tabs groupId="language" items={["C++", "Python"]} persist>
     <Tab value="C++">
     </Tab>
 
     <Tab value="Python">
     </Tab>
-<Tabs>
+</Tabs>
 
 <Tabs groupId="gpu" items={["NVIDIA", "AMD"]} persist>
     <Tab value="NVIDIA">
@@ -118,4 +118,4 @@ Python Installations also need the appropriate version of Numba based on your GP
 
     <Tab value="AMD">
     </Tab>
-<Tabs> -->
+</Tabs>*/}
